@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21dccd"],{d39a:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div")},c=[],r={name:"promoterManage"},d=r,o=t("2877"),u=Object(o["a"])(d,a,c,!1,null,"72b43d28",null);n["default"]=u.exports}}]);
