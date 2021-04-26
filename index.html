@@ -59,61 +59,61 @@
       }
       .van-popup--center {
         border-radius: 10px;
-        top:45%
+        top: 45%;
       }
       .my-swipe .van-swipe-item {
       }
       .procut {
         font-size: 14px;
-        font-size: rgb(128, 127, 127) ;
+        font-size: rgb(128, 127, 127);
         /* background-color: #000; */
       }
       .dd {
         width: 100%;
         height: 200px;
       }
-     
+
       .procut .pitem {
         padding: 0 10px;
         height: 40px;
         line-height: 40px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.068);
       }
-      .dudua{
+      .dudua {
         display: flex;
         justify-content: space-between;
         font-size: 11px;
         height: 30px;
-        padding:5px 10px;
+        padding: 5px 10px;
         /* border-bottom: 1px solid rgba(0, 0, 0, 0.068); */
       }
-      .line{
+      .line {
         margin-top: 5px;
         height: 10px;
         background-color: rgba(204, 204, 204, 0.37);
       }
-      .dd231{
+      .dd231 {
         display: flex;
         justify-content: space-around;
         font-size: 11px;
         line-height: 40px;
         height: 40px;
-         border-bottom: 1px solid rgba(0, 0, 0, 0.068);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.068);
       }
       .dis {
-        margin-top: 25px;
+        margin-top: 5px;
         display: flex;
         height: 50px;
         /* border: 1px solid #f00; */
         align-items: center;
         justify-content: space-between;
       }
-      .disicon{
+      .disicon {
         width: 50%;
         display: flex;
         justify-content: space-around;
       }
-      .disbtn{
+      .disbtn {
         width: 110px;
         margin-right: 10px;
         height: 40px;
@@ -136,55 +136,72 @@
         :style="style"
       >
       </iframe>
-      <div class="zhuzhuxia" :class="classObject" @click="dudu">
+      <div class="zhuzhuxia" v-show='zhuzhu1' :class="classObject" @click="dudu">
         云间阁楼<van-icon :name="iconname" />
       </div>
       <!-- 弹出 -->
       <van-popup
-      @close='close11'
-        :style="{ height: '70%',width:'90%' }"
+        @close="close11"
+        :style="{ height: '65%',width:'90%' }"
         closeable
         v-model="show"
       >
         <div class="swiper">
           <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
             <van-swipe-item v-for="(image, index) in images" :key="index">
-              <!-- <img v-lazy="1.jpg" class="dd" /> -->
-              <img src="1.jpg" alt="" class="dd" />
+              <img v-lazy="image" class="dd" />
+              <!-- <img
+                src="http://www.fmkhz.com/Public/home/indexx/images/case-pic2.jpg"
+                alt=""
+                class="dd"
+              /> -->
             </van-swipe-item>
           </van-swipe>
           <div class="procut">
             <div class="pitem">云间阁楼</div>
-            <div class="pitem"><span style="font-size: 11px;">(新户型</span> ) 时尚新中式典范范明式家具</div>
-            <div class="dudua"> <div>
-              杭州市萧山区萧山商会大厦 <br>
-              A座501
-            </div>  <div style="line-height: 30px;"><van-icon name="phone-o" /></div></div>
+            <div class="pitem">
+              <span style="font-size: 11px">(新户型</span> )
+              时尚新中式典范范明式家具
+            </div>
+            <div class="dudua">
+              <div>
+                杭州市萧山区萧山商会大厦 <br />
+                A座501
+              </div>
+              <div style="line-height: 30px"><van-icon name="phone-o" /></div>
+            </div>
             <div class="line"></div>
             <div class="dd231">
-              <div> <span style="margin-right: 2px;" ><van-icon name="passed" /></span>质量保证</div>
-              <div> <span style="margin-right: 2px;" ><van-icon name="idcard" /></span>售后服务</div>
-              <div> <span style="margin-right: 2px;" ><van-icon name="label-o"/></span>营业执照</div>
+              <div>
+                <span style="margin-right: 2px"><van-icon name="passed" /></span
+                >质量保证
+              </div>
+              <div>
+                <span style="margin-right: 2px"><van-icon name="idcard" /></span
+                >售后服务
+              </div>
+              <div>
+                <span style="margin-right: 2px"
+                  ><van-icon name="label-o" /></span
+                >营业执照
+              </div>
             </div>
             <div class="dis">
               <div class="disicon">
-                <div style="text-align: center;" >
+                <div style="text-align: center">
                   <div><van-icon name="chat-o" /></div>
                   <div>客服</div>
                 </div>
-                <div  style="text-align: center;" >
+                <div style="text-align: center">
                   <div><van-icon name="star" /></div>
                   <div>已收藏</div>
                 </div>
-                <div  style="text-align: center;" >
+                <div style="text-align: center">
                   <div><van-icon name="share-o" /></div>
                   <div>分享</div>
                 </div>
-               
               </div>
-              <div class="disbtn">
-                点击咨询
-              </div>
+              <div class="disbtn">点击咨询</div>
             </div>
 
             <!-- 
@@ -209,10 +226,12 @@
             height: "100vh",
             width: "100%",
           },
+          zhuzhu1:false,
           iconname: "arrow-down",
+          dudu33:'',
           images: [
-            "https://ssl-thumb.720static.com/@/resource/prod/6393d249s3h/821jOpmvey2/17967575/1562916313/imgs/thumb.jpg?imageView2/0/w/200/h/200",
-            "https://ssl-thumb.720static.com/@/resource/prod/6393d249s3h/821jOpmvey2/17967575/1562916313/imgs/thumb.jpg?imageView2/0/w/200/h/200",
+            "http://www.fmkhz.com/Public/home/indexx/images/case-pic2.jpg",
+            "http://www.fmkhz.com/Public/home/indexx/images/service-type1.jpg",
           ],
         },
         computed: {
@@ -226,6 +245,15 @@
               return "";
             }
           },
+        },
+        mounted(){
+       
+        let dudu33=  setTimeout(()=>{
+            this.zhuzhu1=true
+          },10000)
+        },
+        destroyed() {
+          clearTimeout(this.dudu33)
         },
         methods: {
           dudu() {
@@ -246,10 +274,10 @@
             wx.miniProgram.navigateTo({ url: "pages/index/index" });
           },
           close11(value) {
-            if(this.show==false){
-              this.down=false
+            if (this.show == false) {
+              this.down = false;
             }
-            console.log(this.show)
+            console.log(this.show);
           },
           onSave(contactInfo) {
             Toast("保存");
