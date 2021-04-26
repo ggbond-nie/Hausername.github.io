@@ -13,102 +13,254 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"
     />
-
     <!-- 引入 Vue 和 Vant 的 JS 文件 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
-    <title>Vr</title>
+    <title>VR全景展示</title>
+    <style>
+      #app {
+        position: relative;
+      }
+      .zhuzhuxia {
+        position: absolute;
+        z-index: 2010;
+        width: 100px;
+        height: 30px;
+        background-color: rgba(00, 00, 00, 0.6);
+        line-height: 30px;
+        font-size: 14px;
+        color: rgba(240, 248, 255, 0.808);
+        border-radius: 20px 20px 20px 20px;
+        top: 20px;
+        text-align: center;
+        left: 50%;
+        margin-left: -50px;
+        transition: width 0.4s linear;
+      }
+
+      .down {
+        width: 300px;
+        left: 50%;
+        margin-left: -150px;
+        background-color: rgba(00, 00, 00, 0.1);
+        color: #fff;
+      }
+      .iframe {
+        position: absolute;
+        z-index: -1;
+      }
+      .swiper {
+        /* margin-top: 20px; */
+        height: 400px;
+        /* width: 80%; */
+      }
+      .van-overlay {
+        background-color: rgba(0, 0, 0, 0);
+      }
+      .van-popup--center {
+        border-radius: 10px;
+        top:45%
+      }
+      .my-swipe .van-swipe-item {
+      }
+      .procut {
+        font-size: 14px;
+        font-size: rgb(128, 127, 127) ;
+        /* background-color: #000; */
+      }
+      .dd {
+        width: 100%;
+        height: 200px;
+      }
+     
+      .procut .pitem {
+        padding: 0 10px;
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.068);
+      }
+      .dudua{
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        height: 30px;
+        padding:5px 10px;
+        /* border-bottom: 1px solid rgba(0, 0, 0, 0.068); */
+      }
+      .line{
+        margin-top: 5px;
+        height: 10px;
+        background-color: rgba(204, 204, 204, 0.37);
+      }
+      .dd231{
+        display: flex;
+        justify-content: space-around;
+        font-size: 11px;
+        line-height: 40px;
+        height: 40px;
+         border-bottom: 1px solid rgba(0, 0, 0, 0.068);
+      }
+      .dis {
+        margin-top: 25px;
+        display: flex;
+        height: 50px;
+        /* border: 1px solid #f00; */
+        align-items: center;
+        justify-content: space-between;
+      }
+      .disicon{
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+      }
+      .disbtn{
+        width: 110px;
+        margin-right: 10px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 5px;
+        background-color: rgba(14, 14, 14, 0.89);
+      }
+    </style>
   </head>
   <body>
-  
     <div id="app">
-        <div>
-            <van-nav-bar
-            title="vr场景演示"
-            left-text="返回"
-            right-text="按钮"
-            left-arrow
-            @click-left="onClickLeft"
-            @click-right="onClickRight"
-            />
-        </div>
-      
       <iframe
         src="https://720yun.com/t/db7jrOuftv3#scene_id=27837615"
-      
         frameborder="0"
         class="iframe"
         scrolling="no"
         :style="style"
       >
       </iframe>
-      <van-button @click='dudu'> 全屏</van-button>
-      <van-card
-            num="2"
-            price="2.00"
-            desc="描述信息"
-            title="商品标题"
-            thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-            >
-            
-            <template #tags>
-                <van-tag plain type="danger">标签</van-tag>
-                <van-tag plain type="danger">标签</van-tag>
-            </template>
-            <template #footer>
-                <van-button size="mini">按钮</van-button>
-                <van-button size="mini">按钮</van-button>
-            </template>
-            </van-card>
-     
-      <div>{{message}}</div>
-      <van-contact-edit
-  is-edit
-  show-set-default
-  :contact-info="editingContact"
-  set-default-label="设为默认联系人"
-  @save="onSave"
-  @delete="onDelete"
-/>
+      <div class="zhuzhuxia" :class="classObject" @click="dudu">
+        云间阁楼<van-icon :name="iconname" />
+      </div>
+      <!-- 弹出 -->
+      <van-popup
+      @close='close11'
+        :style="{ height: '70%',width:'90%' }"
+        closeable
+        v-model="show"
+      >
+        <div class="swiper">
+          <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+            <van-swipe-item v-for="(image, index) in images" :key="index">
+              <!-- <img v-lazy="1.jpg" class="dd" /> -->
+              <img src="1.jpg" alt="" class="dd" />
+            </van-swipe-item>
+          </van-swipe>
+          <div class="procut">
+            <div class="pitem">云间阁楼</div>
+            <div class="pitem"><span style="font-size: 11px;">(新户型</span> ) 时尚新中式典范范明式家具</div>
+            <div class="dudua"> <div>
+              杭州市萧山区萧山商会大厦 <br>
+              A座501
+            </div>  <div style="line-height: 30px;"><van-icon name="phone-o" /></div></div>
+            <div class="line"></div>
+            <div class="dd231">
+              <div> <span style="margin-right: 2px;" ><van-icon name="passed" /></span>质量保证</div>
+              <div> <span style="margin-right: 2px;" ><van-icon name="idcard" /></span>售后服务</div>
+              <div> <span style="margin-right: 2px;" ><van-icon name="label-o"/></span>营业执照</div>
+            </div>
+            <div class="dis">
+              <div class="disicon">
+                <div style="text-align: center;" >
+                  <div><van-icon name="chat-o" /></div>
+                  <div>客服</div>
+                </div>
+                <div  style="text-align: center;" >
+                  <div><van-icon name="star" /></div>
+                  <div>已收藏</div>
+                </div>
+                <div  style="text-align: center;" >
+                  <div><van-icon name="share-o" /></div>
+                  <div>分享</div>
+                </div>
+               
+              </div>
+              <div class="disbtn">
+                点击咨询
+              </div>
+            </div>
 
+            <!-- 
+             <van-goods-action>
+              <van-goods-action-icon icon="share-o" text="分享" color="#560000" />
+            </van-goods-action> -->
+          </div>
+        </div>
+      </van-popup>
     </div>
     <script>
       // 在 #app 标签下渲染一个按钮组件
       new Vue({
         el: "#app",
         data: {
-                message: 'Hello Vue!',
-                editingContact: {},
-                vh:80,
-                style:{
-                    height: '60vh',
-                    width:'100%'
-                }
-            },
-            methods: {
-                dudu(){
-                    this. style={
-                    height: '80vh',
-                    width:'90%'
-                }
-                    // vant.Toast("提示");
-                },
-                onClickLeft(){
-                    wx.miniProgram.navigateTo({url: "pages/index/index"})
-                },
-                onClickRight(){},
-                onSave(contactInfo) {
-      Toast('保存');
-    },
-    onDelete(contactInfo) {
-      Toast('删除');
-    },
+          message: "Hello Vue!",
+          editingContact: {},
+          vh: 80,
+          down: false,
+          show: false,
+          style: {
+            height: "100vh",
+            width: "100%",
+          },
+          iconname: "arrow-down",
+          images: [
+            "https://ssl-thumb.720static.com/@/resource/prod/6393d249s3h/821jOpmvey2/17967575/1562916313/imgs/thumb.jpg?imageView2/0/w/200/h/200",
+            "https://ssl-thumb.720static.com/@/resource/prod/6393d249s3h/821jOpmvey2/17967575/1562916313/imgs/thumb.jpg?imageView2/0/w/200/h/200",
+          ],
+        },
+        computed: {
+          // 直接当做普通属性调用不加括号
+          // 任何data中数据变化立即重新计算
+          // 计算属性会缓存
+          classObject() {
+            if (this.down == true) {
+              return "down";
+            } else {
+              return "";
+            }
+          },
+        },
+        methods: {
+          dudu() {
+            this.down == true ? (this.down = false) : (this.down = true);
 
-            },
+            this.iconname == "arrow-down"
+              ? (this.iconname = "arrow-up")
+              : (this.iconname = "arrow-down");
+            console.log(this.show == false);
+            if (this.show == false) {
+              this.show = true;
+            } else {
+              this.show = false;
+            }
+            console.log(this.show);
+          },
+          onClickLeft() {
+            wx.miniProgram.navigateTo({ url: "pages/index/index" });
+          },
+          close11(value) {
+            if(this.show==false){
+              this.down=false
+            }
+            console.log(this.show)
+          },
+          onSave(contactInfo) {
+            Toast("保存");
+          },
+          onDelete(contactInfo) {
+            Toast("删除");
+          },
+        },
       });
 
       // 调用函数组件，弹出一个 Toast
-  
 
       // 通过 CDN 引入时不会自动注册 Lazyload 组件
       // 可以通过下面的方式手动注册
