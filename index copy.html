@@ -149,19 +149,12 @@
         <div class="swiper">
           <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
             <van-swipe-item v-for="(image, index) in images" :key="index">
-              <!-- <img v-lazy="image" class="dd" /> -->
-              <img
-              v-if='index==0'
-                src="./3.jpg"
+              <img v-lazy="image" class="dd" />
+              <!-- <img
+                src="http://www.fmkhz.com/Public/home/indexx/images/case-pic2.jpg"
                 alt=""
                 class="dd"
-              />
-              <img
-              v-else
-                src="./2.jpg"
-                alt=""
-                class="dd"
-              />
+              /> -->
             </van-swipe-item>
           </van-swipe>
           <div class="procut">
@@ -237,8 +230,8 @@
           iconname: "arrow-down",
           dudu33:'',
           images: [
-            "image/2.jpg",
-            "image/3.jpg",
+            "http://www.fmkhz.com/Public/home/indexx/images/case-pic2.jpg",
+            "http://www.fmkhz.com/Public/home/indexx/images/service-type1.jpg",
           ],
         },
         computed: {

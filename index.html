@@ -23,19 +23,24 @@
       }
       .zhuzhuxia {
         position: absolute;
-        z-index: 2010;
-        width: 100px;
-        height: 30px;
-        background-color: rgba(00, 00, 00, 0.6);
-        line-height: 30px;
-        font-size: 14px;
-        color: rgba(240, 248, 255, 0.808);
-        border-radius: 20px 20px 20px 20px;
-        top: 20px;
+     
+        width: 40px;
+        height: 40px;
+        /* background-color: rgba(00, 00, 00, 0.6); */
+        /* line-height: 30px; */
+        /* font-size: 14px; */
+        /* color: rgba(240, 248, 255, 0.808); */
+        /* border-radius: 20px 20px 20px 20px; */
+        top: 5px;
         text-align: center;
-        left: 50%;
-        margin-left: -50px;
+        right: 8px;
+        /* margin-left: -50px; */
         transition: width 0.4s linear;
+        z-index: 2010;
+      }
+      .zhuzhuxia img{
+        width: 25px;
+        height: 25px;
       }
 
       .down {
@@ -46,8 +51,8 @@
         color: #fff;
       }
       .iframe {
-        position: absolute;
-        z-index: -1;
+        /* position: absolute;
+        z-index: -1; */
       }
       .swiper {
         /* margin-top: 20px; */
@@ -124,20 +129,28 @@
         border-radius: 5px;
         background-color: rgba(14, 14, 14, 0.89);
       }
+      .van-button--danger{
+        /* color='#880075' */
+        background-color: #880075;
+    border: 1px solid #880075;
+      }
     </style>
   </head>
   <body>
     <div id="app">
       <iframe
-        src="https://720yun.com/t/db7jrOuftv3#scene_id=27837615"
+        src="https://beyond.3dnest.cn/newhouse/?m=8f3f4294_eHvW_94ad&from=singlemessage&isappinstalled=0"
         frameborder="0"
         class="iframe"
         scrolling="no"
         :style="style"
       >
       </iframe>
-      <div class="zhuzhuxia" v-show='zhuzhu1' :class="classObject" @click="dudu">
-        云间阁楼<van-icon :name="iconname" />
+      <div class="zhuzhuxia"   @click="dudu">
+        <!-- 云间阁楼<van-icon :name="iconname" /> -->
+        <img src="./qp.png" v-show="!zhuz" alt="">
+        <img src="./xp.png" v-show="zhuz" alt="">
+
       </div>
       <!-- 弹出 -->
       <van-popup
@@ -217,7 +230,43 @@
             </van-goods-action> -->
           </div>
         </div>
+   
       </van-popup>
+      <div>
+        <van-tabs v-model="activeName" color='#880075'>
+          <van-tab title="售后服务" name="a">
+            <div >
+              <van-address-edit
+                :area-list="areaList"
+                show-postal
+                show-delete
+              
+                show-search-result
+                save-button-text='保存信息'
+                :search-result="searchResult"
+                :area-columns-placeholder="['请选择', '请选择', '请选择']"
+                @save="onSave"
+                @delete="onDelete"
+                @change-detail="onChangeDetail"
+              />
+            </div>
+          </van-tab>
+          <van-tab title="商品信息" name="商品信息">
+            <van-card
+                num="2"
+                tag="热卖"
+                price="100000000000000000"
+                desc="雅居乐棠颂113户型"
+                title="雅居乐"
+                thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
+                origin-price="100000000000000000"
+              />
+          </van-tab>
+          <van-tab title="加盟我们" name="加盟我们"></van-tab>
+        </van-tabs>
+      </div>
+
+    
     </div>
     <script>
       // 在 #app 标签下渲染一个按钮组件
@@ -227,12 +276,16 @@
           message: "Hello Vue!",
           editingContact: {},
           vh: 80,
+          zhuz:false,
+           areaList:[{},{}],
+      searchResult: [],
           down: false,
           show: false,
           style: {
-            height: "100vh",
+            height: "70vh",
             width: "100%",
           },
+          activeName: 'a',
           zhuzhu1:false,
           iconname: "arrow-down",
           dudu33:'',
@@ -254,16 +307,50 @@
           },
         },
         mounted(){
-       
-        let dudu33=  setTimeout(()=>{
-            this.zhuzhu1=true
-          },10000)
+          this.zhuzhu1=true
+        // let dudu33=  setTimeout(()=>{
+        //     this.zhuzhu1=true
+        //   },5000)
         },
         destroyed() {
           clearTimeout(this.dudu33)
         },
         methods: {
+          onSave() {
+      Toast('save');
+    },
+    onDelete() {
+      Toast('delete');
+    },
+    onChangeDetail(val) {
+      if (val) {
+        this.searchResult = [
+          {
+            name: '黄龙万科中心',
+            address: '杭州市西湖区',
+          },
+        ];
+      } else {
+        this.searchResult = [];
+      }
+    },
           dudu() {
+            // this.
+          console.log(this.zhuz)
+            if(this.zhuz==true){
+              this.zhuz=false;
+              this. style= {
+            height: "70vh",
+            width: "100%",
+          }
+            }else{
+              this.zhuz=true;
+              this. style= {
+            height: "100vh",
+            width: "100%",
+          }
+            }
+            return;
             this.down == true ? (this.down = false) : (this.down = true);
 
             this.iconname == "arrow-down"
